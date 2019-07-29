@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.TTT" table="TTT" >
+        <id name="ttt_id" column="ttt_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="ttt_name" column="ttt_name" type="string"></property>
+
+        <set name="ttt_setaccount" cascade="save-update,delete">
+            <key column="tttaccount"/>
+            <one-to-many class="com.tables.Account"/>
+        </set>
+    </class>
+
+</hibernate-mapping>

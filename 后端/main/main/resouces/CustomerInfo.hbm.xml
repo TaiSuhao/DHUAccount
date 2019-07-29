@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.CustomerInfo" table="CustomerInfo" >
+        <id name="customerinfo_id" column="customerinfo_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="customerinfo_name" column="customerinfo_name" type="string">
+        </property>
+        <property name="customerinfo_company" column="customerinfo_company" type="string">
+        </property>
+        <property name="customerinfo_money" column="customerinfo_money" type="java.math.BigDecimal">
+        </property>
+        <property name="customerinfo_phone" column="customerinfo_phone" type="string">
+        </property>
+        <!--多对一（用户） -->
+        <many-to-one name="customerinfo_user" class="com.tables.User" column="usercustomerinfo">
+
+        </many-to-one>
+        <!-- 一对多（应收账管理）-->
+        <set name="customerinfo_setaccountreceivable" cascade="save-update,delete">
+            <key column="customerinfoaccountreceivable"/>
+            <one-to-many class="com.tables.AccountReceivable"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.Document" table="Document" >
+        <id name="document_id" column="document_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="document_note" column="document_note" type="string"></property>
+        <property name="document_debitside" column="document_debitside" type="java.math.BigDecimal"></property>
+        <property name="document_creditside" column="document_creditside" type="java.math.BigDecimal"></property>
+        <property name="document_group" column="document_group" type="int"></property>
+        <property name="document_time" column="document_time" type="calendar"></property>
+        <!-- 多对一（用户）-->
+        <many-to-one name="document_user" class="com.tables.User" column="userdocument"></many-to-one>
+        <!-- 多对一（科目）-->
+        <many-to-one name="document_account" class="com.tables.Account" column="accountdocument"></many-to-one>
+        <!-- 一对一（应收账管理）-->
+        <one-to-one name="document_accountreceivable" class="com.tables.AccountReceivable" property-ref="accountreceivable_document">
+        </one-to-one>
+    </class>
+
+</hibernate-mapping>

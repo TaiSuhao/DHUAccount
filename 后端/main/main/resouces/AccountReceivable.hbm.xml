@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.AccountReceivable" table="AccountReceivable" >
+        <id name="accountreceivable_id" column="accountreceivable_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="accountreceivable_debitside" column="accountreceivable_debitside" type="java.math.BigDecimal"></property>
+        <property name="accountreceivable_creditside" column="accountreceivable_creditside" type="java.math.BigDecimal"></property>
+        <!-- 多对一（凭证）-->
+        <many-to-one name="accountreceivable_document" class="com.tables.Document" column="documentaccountreceivable" unique="true"></many-to-one>
+        <!-- 多对一（客户信息）-->
+        <many-to-one name="accountreceivable_customerinfo" class="com.tables.CustomerInfo" column="customerinfoaccountreceivable"></many-to-one>
+    </class>
+
+</hibernate-mapping>

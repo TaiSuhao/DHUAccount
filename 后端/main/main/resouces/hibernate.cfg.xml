@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.c3p0.max_size">5</property>	<!-- 最大连接数 -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/database3?useSSL=true&amp;serverTimezone=GMT&amp;characterEncoding=utf8</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">13688377585</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!--  default false-->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <mapping resource="Account.hbm.xml" />
+        <mapping resource="AccountReceivable.hbm.xml"/>
+        <mapping resource="CustomerInfo.hbm.xml"/>
+        <mapping resource="Document.hbm.xml"/>
+        <mapping resource="User.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

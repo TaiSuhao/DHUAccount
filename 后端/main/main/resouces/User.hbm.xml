@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.User" table="User" >
+        <id name="user_id" column="user_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="user_username" column="user_username" type="string"></property>
+        <property name="user_password" column="user_password" type="string"></property>
+        <property name="user_phonenumber" column="user_phonenumber" type="string"></property>
+        <property name="user_gender" column="user_gender" type="string"></property>
+        <property name="user_email" column="user_email" type="string"></property>
+        <property name="user_note" column="user_note" type="string"></property>
+        <property name="user_number" column="user_number" type="int"></property>
+        <!-- 一对多（客户信息）-->
+        <set name="user_setcustomerinfo" cascade="save-update,delete">
+            <key column="usercustomerinfo"/>
+            <one-to-many class="com.tables.CustomerInfo"/>
+        </set>
+        <!-- 一对多（凭证）-->
+        <set name="user_setdocument" cascade="save-update,delete">
+            <key column="userdocument"/>
+            <one-to-many class="com.tables.Document"/>
+        </set>
+        <!-- 一对多（科目）-->
+        <set name="user_setaccount" cascade="save-update,delete">
+            <key column="useraccount"/>
+            <one-to-many class="com.tables.Account"/>
+        </set>
+    </class>
+
+</hibernate-mapping>

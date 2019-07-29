@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tables" >
+
+    <!-- 属性table 表示在数据库中的表名  -->
+    <class name="com.tables.Account" table="Account" >
+        <id name="account_id" column="account_id" type="int">
+            <!-- 值native表示会根据数据库来创建不同的主键生成策略 -->
+            <generator class="native"></generator>
+        </id>
+        <property name="account_name" column="account_name" type="string"></property>
+        <property name="account_category" column="account_category" type="string"></property>
+        <property name="account_debitside_base" column="account_debitside_base" type="java.math.BigDecimal"></property>
+        <property name="account_creditside_base" column="account_creditside_base" type="java.math.BigDecimal"></property>
+        <property name="account_debitside_occur" column="account_debitside_occur" type="java.math.BigDecimal"></property>
+        <property name="account_creditside_occur" column="account_creditside_occur" type="java.math.BigDecimal"></property>
+        <property name="account_debitside_final" column="account_debitside_final" type="java.math.BigDecimal"></property>
+        <property name="account_creditside_final" column="account_creditside_final" type="java.math.BigDecimal"></property>
+        <!-- 一对多（凭证）-->
+        <set name="account_setdocument" cascade="save-update,delete">
+            <key column="accountdocument"/>
+            <one-to-many class="com.tables.Document"/>
+        </set>
+        <!-- 多对一（用户）-->
+        <many-to-one name="account_user" class="com.tables.User" column="useraccount"></many-to-one>
+
+    </class>
+
+</hibernate-mapping>
